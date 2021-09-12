@@ -7,8 +7,6 @@ import * as AWSXRay from 'aws-xray-sdk'
 import { TodoItem } from '../models/TodoItem'
 import { TodoUpdate } from '../models/TodoUpdate'
 import { createLogger } from '../utils/logger'
-// import { userInfo } from 'os'
-
 const logger = createLogger('todosAccess')
 
 const XAWS = AWSXRay.captureAWS(AWS)
@@ -20,11 +18,6 @@ export class TodosAccess {
     private readonly todosTable = process.env.TODOS_TABLE,
     private readonly todosByUserIndex = process.env.TODOS_BY_USER_INDEX
   ) {}
-
-  // async todoItemExists(todoId: string): Promise<boolean> {
-  //   const item = await this.getTodoItem(todoId, userId)
-  //   return !!item
-  // }
 
   async getTodoItems(userId: string): Promise<TodoItem[]> {
     logger.info(`Getting all todos for user ${userId} from ${this.todosTable}`)
