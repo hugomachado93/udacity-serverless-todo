@@ -56,7 +56,6 @@ async function verifyToken(authHeader: string): Promise<JwtPayload> {
   const token = getToken(authHeader)
   
   const jwt: Jwt = decode(token, { complete: true }) as Jwt
-  // const cert = await getCertificate()
 
   logger.info(`Token ${token}`)
 
