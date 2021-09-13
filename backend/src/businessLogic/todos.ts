@@ -44,7 +44,7 @@ export async function createTodo(userId: string, createTodoRequest: CreateTodoRe
 export async function updateTodo(userId: string, todoId: string, updateTodoRequest: UpdateTodoRequest) {
   logger.info(`Updating todo ${todoId} for user ${userId}`, { userId, todoId, todoUpdate: updateTodoRequest })
 
-  const item = await todosAccess.getTodoItem(todoId, userId)
+  const item = await todosAccess.getTodoItemById(todoId, userId)
 
   if (!item) {
     logger.error('Item not found')
@@ -56,13 +56,13 @@ export async function updateTodo(userId: string, todoId: string, updateTodoReque
     throw createHttpError(403, `User ${userId} unauthorized`)
   }
 
-  todosAccess.updateTodoItem(todoId, updateTodoRequest as TodoUpdate)
+  todosAccess.updateTodoItemById(todoId, updateTodoRequest as TodoUpdate)
 }
 
 export async function deleteTodo(userId: string, todoId: string) {
   logger.info(`Delete todo ${todoId} for user ${userId}`)
 
-  const item = await todosAccess.getTodoItem(todoId, userId)
+  const item = await todosAccess.getTodoItemById(todoId, userId)
 
   if (!item){
     logger.error('Item not found')
@@ -74,7 +74,7 @@ export async function deleteTodo(userId: string, todoId: string) {
     throw createHttpError(403, `User ${userId} unauthorized`)
   }
 
-  todosAccess.deleteTodoItem(todoId, userId)
+  todosAccess.deleteTodoItemById(todoId, userId)
 }
 
 export async function updateAttachmentUrl(userId: string, todoId: string, attachmentId: string) {
@@ -84,7 +84,7 @@ export async function updateAttachmentUrl(userId: string, todoId: string, attach
 
   logger.info(`Updating todo ${todoId} with attachment URL ${attachmentUrl}`, { userId, todoId })
 
-  const item = await todosAccess.getTodoItem(todoId, userId)
+  const item = await todosAccess.getTodoItemById(todoId, userId)
 
   if (!item){
     logger.error('Item not found')
@@ -96,7 +96,7 @@ export async function updateAttachmentUrl(userId: string, todoId: string, attach
     throw createHttpError(403, `User ${userId} unauthorized`)
   }
 
-  await todosAccess.updateAttachmentUrl(userId, todoId, attachmentUrl)
+  await todosAccess.updateAttachmentUrlById(userId, todoId, attachmentUrl)
 }
 
 export async function generateUploadUrl(attachmentId: string): Promise<string> {

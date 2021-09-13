@@ -38,7 +38,7 @@ export class TodosAccess {
     return items as TodoItem[]
   }
 
-  async getTodoItem(todoId: string, userId: String): Promise<TodoItem> {
+  async getTodoItemById(todoId: string, userId: String): Promise<TodoItem> {
     logger.info(`Getting todo ${todoId} from ${this.todosTable}`)
 
     const result = await this.docClient.get({
@@ -63,7 +63,7 @@ export class TodosAccess {
     }).promise()
   }
 
-  async updateTodoItem(todoId: string, todoUpdate: TodoUpdate) {
+  async updateTodoItemById(todoId: string, todoUpdate: TodoUpdate) {
     logger.info(`Update todo item ${todoId}`)
 
     await this.docClient.update({
@@ -83,7 +83,7 @@ export class TodosAccess {
     }).promise()   
   }
 
-  async deleteTodoItem(todoId: string, userId: String) {
+  async deleteTodoItemById(todoId: string, userId: String) {
     logger.info(`Deleting todo item ${todoId} from ${this.todosTable}`)
 
     await this.docClient.delete({
@@ -95,7 +95,7 @@ export class TodosAccess {
     }).promise()    
   }
 
-  async updateAttachmentUrl(userId: String, todoId: string, attachmentUrl: string) {
+  async updateAttachmentUrlById(userId: String, todoId: string, attachmentUrl: string) {
     logger.info(`Updating attachment URL for todo ${todoId} in ${this.todosTable}`)
 
     await this.docClient.update({
