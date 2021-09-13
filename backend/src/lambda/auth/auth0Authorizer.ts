@@ -10,7 +10,7 @@ const logger = createLogger('auth')
 
 const jwksUrl = "https://dev-ev4gi1v1.us.auth0.com/.well-known/jwks.json"
 
-let cachedCertificate: string
+let certification: string
 
 export const handler = async (
   event: CustomAuthorizerEvent
@@ -75,9 +75,8 @@ function getToken(authHeader: string): string {
 }
 
 async function getCertificate(): Promise<string> {
-  if (cachedCertificate) return cachedCertificate
 
-  logger.info(`Fetching certificate from ${jwksUrl}`)
+  logger.info(`Cetificate url ${jwksUrl}`)
 
   const response = await Axios.get(jwksUrl)
   const keys = response.data.keys
@@ -98,16 +97,14 @@ async function getCertificate(): Promise<string> {
   if (!signingKeys.length)
     throw new Error('No JWKS signing keys found')
   
-  // XXX: Only handles single signing key
   const key = signingKeys[0]
-  const pub = key.x5c[0]  // public key
+  const pub = key.x5c[0]
 
-  // Certificate found!
-  cachedCertificate = certToPEM(pub)
+  certification = certToPEM(pub)
 
-  logger.info('Valid certificate found', cachedCertificate)
+  logger.info(`Certification ${certification}`)
 
-  return cachedCertificate
+  return certification
 }
 
 function certToPEM(cert: string): string {

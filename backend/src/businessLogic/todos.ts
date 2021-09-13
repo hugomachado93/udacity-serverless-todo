@@ -100,7 +100,7 @@ export async function updateAttachmentUrl(userId: string, todoId: string, attach
 }
 
 export async function generateUploadUrl(attachmentId: string): Promise<string> {
-  logger.info(`Generating upload URL for attachment ${attachmentId}`)
+  logger.info(`upload URL ${attachmentId}`)
 
   const uploadUrl = await todosStorage.getUploadUrl(attachmentId)
 

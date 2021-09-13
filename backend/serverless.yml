@@ -4,8 +4,6 @@ service:
 plugins:
   - serverless-webpack
   - serverless-iam-roles-per-function
-  # - serverless-dynamodb-local
-  # - serverless-offline
 
 provider:
   name: aws
