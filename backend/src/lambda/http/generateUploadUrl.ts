@@ -6,10 +6,7 @@ import * as uuid from 'uuid'
 import * as middy from 'middy'
 import { cors, httpErrorHandler } from 'middy/middlewares'
 import { generateUploadUrl, updateAttachmentUrl } from '../../businessLogic/todos'
-import { createLogger } from '../../utils/logger'
 import { getUserId } from '../utils'
-
-const logger = createLogger('generateUploadUrl')
 
 export const handler = middy(
   async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
