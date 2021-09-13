@@ -13,8 +13,6 @@ const logger = createLogger('generateUploadUrl')
 
 export const handler = middy(
   async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
-    logger.info('Processing generateUploadUrl event', { event })
-
     const userId = getUserId(event)
     const todoId = event.pathParameters.todoId
     const attachmentId = uuid.v4()
