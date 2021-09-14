@@ -56,7 +56,7 @@ export async function updateTodo(userId: string, todoId: string, updateTodoReque
     throw createHttpError(403, `User ${userId} unauthorized`)
   }
 
-  todosAccess.updateTodoItemById(todoId, updateTodoRequest as TodoUpdate)
+  todosAccess.updateTodoItemById(todoId, userId, updateTodoRequest as TodoUpdate)
 }
 
 export async function deleteTodo(userId: string, todoId: string) {
